@@ -18,7 +18,6 @@ export default function Login() {
             style={styles.logo}
             source={require("../assets/images/Logo.png")}
           />
-
           <View style={styles.Formcontainer}>
                 <Text style={styles.email}> Email</Text>
                 <TextInput 
