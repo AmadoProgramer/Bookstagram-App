@@ -11,10 +11,11 @@ export default function RootLayout() {
       style={styles.container}
     >
       <Stack>
-        <Stack.Screen name="Login" options={{ title: "" }} />
-        <Stack.Screen name="index" options={{ title: "" }} />
-        <Stack.Screen name="Register" options={{ title: "" }} />
-        <Stack.Screen name="notfound" options={{ title: "" }} />
+        <Stack.Screen
+          name="login"
+          options={{ headerShown: false, title: "" }}
+        />
+        
       </Stack>
     </LinearGradient>
   );
