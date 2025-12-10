@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Modal } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { Link } from 'expo-router';
 
 export default function AddBookScreen() {
   const [image, setImage] = useState<string | null>(null);
@@ -8,7 +9,7 @@ export default function AddBookScreen() {
   const [titulo, setTitulo] = useState('');
   const [rating, setRating] = useState(0);
 
-  // Solicitar permisos
+
   const requestPermissions = async () => {
     const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
     const galleryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -23,7 +24,6 @@ export default function AddBookScreen() {
     return true;
   };
 
-  // Abrir cámara
   const openCamera = async () => {
     const hasPermission = await requestPermissions();
     if (!hasPermission) return;
@@ -41,8 +41,6 @@ export default function AddBookScreen() {
       setImage(result.assets[0].uri);
     }
   };
-
-  // Abrir galería
   const openGallery = async () => {
     const hasPermission = await requestPermissions();
     if (!hasPermission) return;
@@ -61,34 +59,27 @@ export default function AddBookScreen() {
     }
   };
 
-  // Guardar libro
   const handleGuardarBorrador = () => {
     console.log('Guardando borrador...', { image, titulo, rating });
-    // Aquí tu lógica para guardar
   };
 
   const handleAgregar = () => {
     console.log('Agregando libro...', { image, titulo, rating });
-    // Aquí tu lógica para agregar
   };
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Image 
-          source={require('../assets/images/Logo.png')} // Reemplaza con tu logo
+          source={require('../assets/images/Logo.png')} 
           style={styles.logo}
         />
       </View>
-
-      {/* Card del libro */}
-      <View style={styles.card}>
+        <View style={styles.card}>
         <View style={styles.badge}>
           <Text style={styles.badgeText}>Alex Avila</Text>
         </View>
 
-        {/* Área de imagen */}
         <TouchableOpacity 
           style={styles.imageContainer}
           onPress={() => setModalVisible(true)}
@@ -102,7 +93,6 @@ export default function AddBookScreen() {
           )}
         </TouchableOpacity>
 
-        {/* Título y puntuación */}
         <View style={styles.infoRow}>
           <Text style={styles.label}>Título del libro</Text>
           <View style={styles.ratingContainer}>
@@ -144,10 +134,11 @@ export default function AddBookScreen() {
         </View>
       </View>
 
-      {/* Botones de acción */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.cancelButton}>
+          <Link href= { "/" }>
           <Text style={styles.cancelButtonText}>✕ cancelar</Text>
+          </Link>
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -165,7 +156,6 @@ export default function AddBookScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Modal para elegir cámara o galería */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -318,10 +308,13 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-around',
+    alignSelf:'center',
     marginTop: 20,
-    paddingHorizontal: 20,
+    width:300,
+    paddingHorizontal: 40,
+    gap:7
   },
   cancelButton: {
     backgroundColor: '#E0E0E0',

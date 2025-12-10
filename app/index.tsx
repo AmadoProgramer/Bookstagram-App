@@ -1,7 +1,8 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView, } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Navbar from "../components/navbar";
 import { useState } from "react";
+import { Link, Href } from "expo-router";
 
 export default function Index() {
   const [rating, setRating] = useState(0);
@@ -14,10 +15,12 @@ export default function Index() {
       </View>
       <View style={styles.body}>
         <View style={styles.headerform}>
+          <Link href={`opinion-book` as Href}>
           <Image
             style={styles.user}
             source={require("../assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
           />
+          </Link>
           <Text style={styles.username}>Jose_ </Text>
         </View>
         <Image

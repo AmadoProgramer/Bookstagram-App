@@ -1,4 +1,3 @@
-// components/SimpleHamburgerMenu.tsx
 import React, { useState } from "react";
 import {
   View,
@@ -10,16 +9,16 @@ import {
   StatusBar,
 } from "react-native";
 import { Image } from "expo-image";
+import { Link, Href } from "expo-router";
 
 export default function Menu() {
   const [visible, setVisible] = useState(false);
   const menuItems = [
-    { id: "1", title: "Notificacion" },
-    { id: "2", title: "Tu progreso" },
-    { id: "3", title: "Nuevos libros" },
-    { id: "4", title: "Libros favoritos" },
-    { id: "5", title: "Configuración" },
-    { id: "6", title: "cerrar sesion" },
+    { id: "1", title: "Notificacion", href: `index` as Href },
+    { id: "2", title: "Tu progreso", href: `index` as Href },
+    { id: "3", title: "Nuevo libro", href: `add-book` as Href },
+    { id: "4", title: "Libros favoritos", href: `login` as Href },
+    { id: "5", title: "Configuración", href: `index` as Href },
   ];
   return (
     <>
@@ -59,7 +58,7 @@ export default function Menu() {
               <View style={styles.userSection}>
                 <Image
                   style={styles.avatar}
-                  source={require("../assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png") }
+                  source={require("../assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
                 />
                 <Text style={styles.userName}>Juan Pérez</Text>
                 <Text style={styles.userEmail}>@juan_23</Text>
@@ -67,27 +66,32 @@ export default function Menu() {
             </View>
             <ScrollView style={styles.menuList}>
               {menuItems.map((item) => (
-                <TouchableOpacity
-                  key={item.id}
-                  style={styles.menuItem}
-                  onPress={() => {
-                    setVisible(false);
-                  }}
-                >
-                  <Text style={styles.itemText}>{item.title}</Text>
-                  <Text style={styles.arrow}>›</Text>
-                </TouchableOpacity>
+                <Link key={item.id} href={item.href} asChild>
+                  <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => {
+                      setVisible(false);
+                    }}
+                  >
+                    <Text style={styles.itemText}>{item.title}</Text>
+                    <Text style={styles.arrow}>›</Text>
+                  </TouchableOpacity>
+                </Link>
               ))}
-
+              <Link 
+               href={`login` as Href}
+               style={styles.logoutButton}
+               >
               <TouchableOpacity
-                style={styles.logoutButton}
+                
                 onPress={() => {
                   setVisible(false);
                 }}
               >
-                <Text style={styles.logoutIcon}>🚪</Text>
                 <Text style={styles.logoutText}>Cerrar Sesión</Text>
               </TouchableOpacity>
+              </Link>
+
             </ScrollView>
           </View>
         </View>

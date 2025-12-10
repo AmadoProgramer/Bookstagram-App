@@ -87,7 +87,7 @@ export default function BookOpinions() {
             </View>
             <View style={styles.statItem}>
               <Text style={styles.statNumber}>50</Text>
-              <Text style={styles.statLabel}>Quotes</Text>
+              <Text style={styles.statLabel}>seguidos</Text>
             </View>
           </View>
 
@@ -98,7 +98,7 @@ export default function BookOpinions() {
           </View>
         </View>
         <View style={styles.tabs}>
-          {["Opiniones", "Libros", "Seguidores", "Quotes"].map((tab) => (
+          {["Opiniones", "Libros", "Seguidores"].map((tab) => (
             <TouchableOpacity
               key={tab}
               style={[styles.tab, activeTab === tab && styles.tabActive]}

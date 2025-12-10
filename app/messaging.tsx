@@ -4,7 +4,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
- 
   StatusBar,
   FlatList,
 } from 'react-native';
@@ -36,7 +35,6 @@ export default function Messaging() {
     { id: '4', userName: 'PatriciaLanyer', userAvatar: 'https://i.pravatar.cc/150?img=20' },
     { id: '5', userName: 'Emeli_Resling', userAvatar: 'https://i.pravatar.cc/150?img=47' },
   ];
-
   const chats: Chat[] = [
     {
       id: '1',

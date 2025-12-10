@@ -19,11 +19,11 @@ export default function NotFoundScreen() {
     >
       <Image
         style={styles.logo}
-        source={require("../assets/images/Logo.png")}
+        source={require("@/assets/images/Logo.png")}
       />
       <Image
         style={styles.account}
-        source={require("../assets/images/account_circle.png")}
+        source={require("@/assets/images/account_circle.png")}
       />
       <Text style={styles.Title}>¿Problemas para loguearte?</Text>
       <Text style={styles.parrafo}>

@@ -2,6 +2,7 @@ import { Stack } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
 
+
 export default function RootLayout() {
   return (
     <LinearGradient
@@ -11,11 +12,43 @@ export default function RootLayout() {
       style={styles.container}
     >
       <Stack>
-        <Stack.Screen
-          name="login"
-          options={{ headerShown: false, title: "" }}
+       <Stack.Screen
+          name="index"
+          options={{ headerShown: false, title: "index" }}
         />
-        
+        <Stack.Screen
+          name="view/login/login"
+          options={{ headerShown: false, title: "login" }}
+        />
+        <Stack.Screen
+          name="register"
+          options={{ headerShown: false, title: "register" }}
+        />
+        <Stack.Screen
+          name="login-problem"
+          options={{ headerShown: false, title: "login-problem" }}
+        />
+        <Stack.Screen
+          name="notfound"
+          options={{ headerShown: false, title: "notfound" }}
+        />
+        <Stack.Screen
+          name="profile-booker"
+          options={{ headerShown: false, title: "profile-Booker" }}
+        />
+        <Stack.Screen
+          name="opinion-book"
+          options={{ headerShown: false, title: "opinion-Book" }}
+        />
+        <Stack.Screen
+          name="messaging"
+          options={{ headerShown: false, title: "messaging" }}
+        />
+        <Stack.Screen
+          name="add-book"
+          options={{ headerShown: false, title: "add-Book" }}
+        />
+      
       </Stack>
     </LinearGradient>
   );
