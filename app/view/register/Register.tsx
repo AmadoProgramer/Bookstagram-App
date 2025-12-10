@@ -8,7 +8,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "expo-image";
 import { Link, Href } from "expo-router";
-import Viewmodel from "./viewmodel";
+import Viewmodel from "./viemodel";
 import { CustomTextInput } from "@/components/customTextInpunt";
 import { RoundedButton } from "./roundedButton";
 

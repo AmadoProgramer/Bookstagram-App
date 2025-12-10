@@ -73,7 +73,7 @@ export default function BookOpinions() {
         <View style={styles.bookSection}>
           <Image
             style={styles.bookCover}
-            source={require("../assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
+            source={require("@/assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
             contentFit="cover"
           />
           <View style={styles.statsRow}>

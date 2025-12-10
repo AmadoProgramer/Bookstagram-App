@@ -1,14 +1,50 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Modal, TextInput } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { Link } from 'expo-router';
+import { Link, useRouter} from 'expo-router';
+import { useApi } from '@/Hook/Useapi';
+import { bookService } from '@/services/bookService';
 
 export default function AddBookScreen() {
   const [image, setImage] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [titulo, setTitulo] = useState('');
   const [rating, setRating] = useState(0);
+const router = useRouter();
+  const uploadImageMutation = useApi(bookService.uploadBookCover);
+  const createBookMutation = useApi(bookService.createBook, {
+    onSuccess: () => {
+      router.back(); // Volver atrás
+      // Mostrar mensaje de éxito
+    },
+  });
 
+  const handleAgregar = async () => {
+    try {
+      let coverUrl = '';
+      
+      // Subir imagen si existe
+      if (image) {
+        const uploadResult = await uploadImageMutation.execute(image);
+        coverUrl = uploadResult;
+      }
+
+      // Crear el libro
+      await createBookMutation.execute({
+        title: titulo,
+        author: 'Autor', // Agregar input para autor
+        description: 'Descripción', // Agregar input para descripción
+        coverUrl,
+        rating,
+        genre: 'Género', // Agregar input para género
+        language: 'Español',
+        publicationDate: new Date().toISOString().split('T')[0],
+      });
+
+    } catch (error) {
+      console.error('Error al agregar libro:', error);
+    }
+  };
 
   const requestPermissions = async () => {
     const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
@@ -63,15 +99,11 @@ export default function AddBookScreen() {
     console.log('Guardando borrador...', { image, titulo, rating });
   };
 
-  const handleAgregar = () => {
-    console.log('Agregando libro...', { image, titulo, rating });
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image 
-          source={require('../assets/images/Logo.png')} 
+          source={require('@/assets/images/Logo.png')} 
           style={styles.logo}
         />
       </View>
@@ -96,7 +128,7 @@ export default function AddBookScreen() {
         <View style={styles.infoRow}>
           <Text style={styles.label}>Título del libro</Text>
           <View style={styles.ratingContainer}>
-            <Text style={styles.label}>Puntuación</Text>
+            <TextInput style={styles.label}>Puntuación</TextInput>
             <View style={styles.stars}>
               {[1, 2, 3, 4, 5].map((star) => (
                 <TouchableOpacity 
@@ -115,19 +147,19 @@ export default function AddBookScreen() {
         {/* Detalles del libro */}
         <View style={styles.details}>
           <View style={styles.detailRow}>
-            <Text style={styles.detailLabel}>Genero del libro</Text>
+            <TextInput style={styles.detailLabel}>Genero del libro</TextInput>
             <Text style={styles.detailLabel}>Editorial</Text>
           </View>
           <View style={styles.detailRow}>
             <Text style={styles.detailLabel}>Lenguaje</Text>
             <Text style={styles.detailLabel}>Fecha de Publicación</Text>
           </View>
-          <Text style={styles.detailLabel}>Autor</Text>
+          <TextInput style={styles.detailLabel}>Autor</TextInput>
         </View>
 
         {/* Descripción */}
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionLabel}>Description</Text>
+          <TextInput style={styles.descriptionLabel}>Description</TextInput>
           <Text style={styles.descriptionPlaceholder}>
             DESCRIPCION DEL LIBRO NO MAYOR A 500 CARACTERES
           </Text>

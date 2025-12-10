@@ -4,16 +4,37 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Link, Href } from "expo-router";
+import { Link, Href, useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "expo-image";
 import useViewModel from "./Viewmodel"
 import { CustomTextInput } from "@/components/customTextInpunt";
 import { RoundedButton } from "../register/roundedButton";
+import { useApi } from '@/Hook/Useapi';
+import { authService } from '@/services/authService';
+
 
 export default function Login() {
+  const router = useRouter();
   const { email, password, onChange } = useViewModel();
-
+  
+  const loginMutation = useApi(authService.login, {
+    onSuccess: (data) => {
+      console.log('Login exitoso:', data.user);
+      router.replace('/'); // Redirigir al inicio
+    },
+    onError: (error) => {
+      console.error('Error en login:', error);
+      // Mostrar alerta al usuario
+    },
+  });
+   const handleLogin = async () => {
+    try {
+      await loginMutation.execute({ email, password });
+    } catch (error) {
+      // Error ya manejado en onError
+    }
+  };
   return (
     <View style={styles.root}>
       <LinearGradient
@@ -47,11 +68,9 @@ export default function Login() {
                                    value={password}
                                    secureTextEntry={true}        
           />
-          <TouchableOpacity style={styles.inicio}>
-            <RoundedButton text='Iniciar sesion' onPress={() => {
-                                     console.log('Email: ' + email);
-                                     console.log('Password: ' + password);
-                                   }} />
+          <TouchableOpacity style={styles.inicio}  onPress={handleLogin}
+      disabled={loginMutation.loading}>
+            <RoundedButton text= {loginMutation.loading ? 'Cargando...' : 'Iniciar sesión'} onPress={handleLogin} />
           </TouchableOpacity>
           <Text style={styles.or}> or</Text>
           <TouchableOpacity style={styles.google}>

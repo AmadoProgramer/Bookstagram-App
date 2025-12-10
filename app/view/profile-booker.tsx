@@ -97,7 +97,7 @@ export default function Profile() {
         <View style={styles.profileSection}>
           <Image
             style={styles.avatar}
-            source={require("../assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
+            source={require("@/assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
           />
           
           <View style={styles.statsContainer}>

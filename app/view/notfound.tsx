@@ -14,7 +14,7 @@ export default function NotFound() {
       <View style={styles.container}>
         <Image
           style={styles.logo}
-          source={require("../assets/images/Logo.png")}
+          source={require("@/assets/images/Logo.png")}
         />
         <Text style={styles.title}>Oops! Something went wrong!</Text>
         <Text style={styles.error}> Error 503</Text>

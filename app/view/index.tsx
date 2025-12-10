@@ -1,6 +1,6 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView, } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Navbar from "../components/navbar";
+import Navbar from "../../components/navbar";
 import { useState } from "react";
 import { Link, Href } from "expo-router";
 
@@ -18,14 +18,14 @@ export default function Index() {
           <Link href={`opinion-book` as Href}>
           <Image
             style={styles.user}
-            source={require("../assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
+            source={require("@/assets/images/Captura de pantalla 2025-11-19 a la(s) 5.05.03 p.m. 1.png")}
           />
           </Link>
           <Text style={styles.username}>Jose_ </Text>
         </View>
         <Image
           style={styles.publicacion}
-          source={require("../assets/images/image 1.png")}
+          source={require("@/assets/images/image 1.png")}
         />
         <Text> Alas de sangre: Book I </Text>
         <View style={styles.etiqueta}>
