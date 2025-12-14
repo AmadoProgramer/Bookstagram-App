@@ -5,22 +5,20 @@ import { environmentVars } from '../config/environment-vars';
 export const bootstrap = async () => {
   try {
     // Initialize Database
-    console.log('🔌 Initializing database...');
+    console.log('🔌 Iniciando base de datos...');
     await AppDataSource.initialize();
-    console.log('✅ Database initialized successfully');
+    console.log('✅ Base de datos iniciada  correctamente');
 
-    // Create Express app
     const app = createApp();
 
-    // Start server
     const port = environmentVars.port;
     app.listen(port, () => {
       console.log(
-        `🚀 Server is running at http://localhost:${port} - Environment: ${environmentVars.nodeEnv}`,
+        `🚀 Servidor esta corriendo en el http://localhost:${port} - Environment: ${environmentVars.nodeEnv}`,
       );
     });
   } catch (error) {
-    console.error('❌ Error during application bootstrap:', error);
+    console.error('❌ Error durante la application bootstrap:', error);
     process.exit(1);
   }
 };
