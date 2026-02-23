@@ -1,4 +1,4 @@
-name: SonarCloud Analysis PHP
+name: SonarCloud Analysis TypeScript
 on:
   push:
     branches: [ main ]
@@ -16,10 +16,16 @@ jobs:
       with:
         fetch-depth: 0
         
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
-        php-version: '8.1'
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        cd backend && npm ci
+        cd ../frontend && npm ci
         
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v2
